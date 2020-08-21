@@ -21,6 +21,13 @@ public class Record {
         this.totalPrice = new SimpleDoubleProperty(totalPrice);
     }
 
+    Record(int barcode, String product, double price, int stock){
+        this.barcode = new SimpleIntegerProperty(barcode);
+        this.product = new SimpleStringProperty(product);
+        this.price = new SimpleDoubleProperty(price);
+        this.stock = new SimpleIntegerProperty(stock);
+    }
+
     public double getTotalPrice() {
         return totalPrice.get();
     }

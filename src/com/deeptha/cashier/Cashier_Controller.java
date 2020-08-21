@@ -5,16 +5,19 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 
+import java.net.URL;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.ResourceBundle;
 
-public class Cashier_Controller {
+public class Cashier_Controller implements Initializable {
 
     //get instance of database connection
     Connect connection = Connect.getInstance();
@@ -32,6 +35,8 @@ public class Cashier_Controller {
     public TextField paid = null;
     public TextField change = null;
 
+    public TextField search = null;
+
     //table controller
     @FXML
     private TableView<Record> billTable;
@@ -48,6 +53,18 @@ public class Cashier_Controller {
     @FXML
     private TableColumn<Record, Double> billTotalPrice;
 
+    //table 2
+    @FXML
+    private TableView<Record> searchTable;
+    @FXML
+    private TableColumn<Record, Integer> searchBarcode;
+    @FXML
+    private TableColumn<Record, String> searchName;
+    @FXML
+    private TableColumn<Record, Double> searchPrice;
+    @FXML
+    private TableColumn<Record, Integer> searchStock;
+
 
     //local variables
     int bar;
@@ -59,15 +76,31 @@ public class Cashier_Controller {
     //
     public List<Record> records = new ArrayList<>();
 
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        initColumns();
+        initColumns2();
+        paneTwoFunction();
+    }
 
-    //barcode search
-    public void onType(ActionEvent actionEvent) {
+    void initColumns(){
         billBarcode.setCellValueFactory(new PropertyValueFactory<>("barcode"));
         billPrice.setCellValueFactory(new PropertyValueFactory<>("price"));
         billProduct.setCellValueFactory(new PropertyValueFactory<>("product"));
         billQuantity.setCellValueFactory(new PropertyValueFactory<>("quantity"));
         billStock.setCellValueFactory(new PropertyValueFactory<>("stock"));
         billTotalPrice.setCellValueFactory(new PropertyValueFactory<>("totalPrice"));
+    }
+
+    void initColumns2(){
+        searchBarcode.setCellValueFactory(new PropertyValueFactory<>("barcode"));
+        searchPrice.setCellValueFactory(new PropertyValueFactory<>("price"));
+        searchName.setCellValueFactory(new PropertyValueFactory<>("product"));
+        searchStock.setCellValueFactory(new PropertyValueFactory<>("stock"));
+    }
+
+    //barcode search
+    public void onType(ActionEvent actionEvent) {
 
         bar = Integer.parseInt(barcode.getText());
 
@@ -148,6 +181,13 @@ public class Cashier_Controller {
     }
 
     public void generateBill(ActionEvent actionEvent) {
+        Alert alert = new Alert(Alert.AlertType.NONE);
+        alert.setAlertType(Alert.AlertType.CONFIRMATION);
+        alert.setHeaderText("Are sure you want to generate the bill?");
+        Optional<ButtonType> answer = alert.showAndWait();
+        if(answer.get() == ButtonType.OK){
+//            ResultSet result = Connect.executeQuery("Insert I")
+        }
     }
 
     public void cancel(ActionEvent actionEvent) {
@@ -180,5 +220,69 @@ public class Cashier_Controller {
         double paidAmount = Double.parseDouble(paid.getText());
         double changeAmount = paidAmount - Double.parseDouble(total.getText());
         change.setText(Double.toString(changeAmount));
+    }
+
+    //Pane 2
+    void paneTwoFunction(){
+        ResultSet results = Connect.executeQuery("Select * from products");
+        if(results != null){
+            ObservableList<Record> list2 = FXCollections.observableArrayList();
+            try {
+                String searchText = search.getText().toLowerCase();
+                int searchBarcode;
+                String searchName;
+                Double searchPrice;
+                int searchStock;
+
+                if(searchText.isEmpty() || searchText == null ){
+                    while (results.next()){
+                        searchBarcode = results.getInt("barcode");
+                        searchName = results.getString("product");
+                        searchPrice = results.getDouble("price");
+                        searchStock = results.getInt("stock");
+
+                        list2.add(new Record(searchBarcode,searchName,searchPrice,searchStock));
+                    }
+                }else{
+                    while (results.next()){
+                        if(results.getString("product").toLowerCase().contains(searchText)){
+
+                            searchBarcode = results.getInt("barcode");
+                            searchName = results.getString("product");
+                            searchPrice = results.getDouble("price");
+                            searchStock = results.getInt("stock");
+
+                            list2.add(new Record(searchBarcode,searchName,searchPrice,searchStock));
+                        }else continue;
+                    }
+                }
+                searchTable.getItems().setAll(list2);
+
+            } catch (SQLException throwables) {
+                throwables.printStackTrace();
+            }
+        }else{
+            System.out.println("Error");
+        }
+    }
+
+
+    public void search(ActionEvent actionEvent) {
+        paneTwoFunction();
+    }
+
+    public void addFromSearch(ActionEvent actionEvent) {
+
+        Record selected = searchTable.getSelectionModel().getSelectedItem();
+
+        product.setText(selected.getProduct());
+        price.setText(Double.toString(selected.getPrice()));
+        stock.setText(Integer.toString(selected.getStock()));
+
+        proName = selected.getProduct();
+        proPrice = selected.getPrice();
+        proStock = selected.getStock();
+
+        add.setDisable(false);
     }
 }
