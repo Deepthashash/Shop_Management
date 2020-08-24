@@ -177,7 +177,7 @@
                                           <Insets top="5.0" />
                                        </VBox.margin>
                                     </HBox>
-                                    <Button maxWidth="200.0" mnemonicParsing="false" onAction="#generateBill" prefWidth="200.0" text="Generate Bill">
+                                    <Button maxWidth="200.0" mnemonicParsing="false" onAction="#generateBill" prefWidth="200.0" text="Generate Bill" fx:id="generateBill">
                                        <VBox.margin>
                                           <Insets left="30.0" top="10.0" />
                                        </VBox.margin>

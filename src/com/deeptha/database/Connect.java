@@ -28,7 +28,7 @@ public class Connect {
             e.printStackTrace();
         }
     }
-    //get data
+    //returns some value
     public static ResultSet executeQuery(String query){
         ResultSet results;
         try {
@@ -39,6 +39,17 @@ public class Connect {
             return null;
         }
         return results;
+    }
+
+    //nothing get returned
+    public static void executeAction(String query){
+        ResultSet results;
+        try {
+            stmt = conn.createStatement();
+            stmt.execute(query);
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
     }
 
 }

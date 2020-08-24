@@ -12,6 +12,8 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import java.net.URL;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Timestamp;
+import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -31,6 +33,7 @@ public class Cashier_Controller implements Initializable {
     public Label stock = null;
     public TextField quantity = null;
     public Button add;
+    public Button generateBill;
     public TextField total = null;
     public TextField paid = null;
     public TextField change = null;
@@ -72,12 +75,16 @@ public class Cashier_Controller implements Initializable {
     double proPrice;
     int proStock;
     int proQuantity;
+    double totalPrice = 0.0;
+    double paidAmount = 0.0;
+    double changeAmount = 0.0;
 
     //
     public List<Record> records = new ArrayList<>();
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        generateBill.setDisable(true);
         initColumns();
         initColumns2();
         paneTwoFunction();
@@ -173,6 +180,16 @@ public class Cashier_Controller implements Initializable {
         quantity.setText("1");
     }
 
+    void clearBill(){
+        totalPrice = 0.0;
+        paidAmount = 0.0;
+        changeAmount = 0.0;
+        paid.setText(" ");
+        change.setText(" ");
+        records.clear();
+        addToTable();
+    }
+
     //add records list to the table
     void addToTable(){
         ObservableList<Record> list = FXCollections.observableArrayList(records);
@@ -180,14 +197,40 @@ public class Cashier_Controller implements Initializable {
         calculateTotal();
     }
 
-    public void generateBill(ActionEvent actionEvent) {
+    public void generateBill(ActionEvent actionEvent) throws SQLException {
         Alert alert = new Alert(Alert.AlertType.NONE);
-        alert.setAlertType(Alert.AlertType.CONFIRMATION);
-        alert.setHeaderText("Are sure you want to generate the bill?");
-        Optional<ButtonType> answer = alert.showAndWait();
-        if(answer.get() == ButtonType.OK){
-//            ResultSet result = Connect.executeQuery("Insert I")
+        if(records.isEmpty()){
+            alert.setAlertType(Alert.AlertType.ERROR);
+            alert.setHeaderText("No items to bill!");
+            alert.show();
+        }else{
+            alert.setAlertType(Alert.AlertType.CONFIRMATION);
+            alert.setHeaderText("Are sure you want to generate the bill?");
+            Optional<ButtonType> answer = alert.showAndWait();
+            if(answer.get() == ButtonType.OK){
+                Timestamp instant= Timestamp.from(Instant.now());
+                Connect.executeAction("Insert into invoice (issuedTime,billTotal,paidAmount,changeAmount) values ("+"'"+instant+"'"+","+"'"+totalPrice+"'"+","+"'"+paidAmount+"'"+","+"'"+changeAmount+"'"+")");
+
+                int id;
+                ResultSet resultSet = Connect.executeQuery("SELECT LAST_INSERT_ID()");
+                resultSet.next();
+                id = resultSet.getInt(1);
+
+                for(Record item : records){
+                    Connect.executeAction("Insert into invoice_products values ("+"'"+id+"'"+","+"'"+item.getBarcode()+"'"+","+"'"+item.getQuantity()+"'"+","+"'"+item.getTotalPrice()+"'"+")");
+                    int remain = item.getStock() - item.getQuantity();
+                    Connect.executeAction("Update products set stock="+"'"+remain+"' where barcode="+"'"+item.getBarcode()+"'");
+                }
+
+                clearBill();
+                alert.setAlertType(Alert.AlertType.INFORMATION);
+                alert.setHeaderText("Bill Generated");
+                alert.show();
+            }
         }
+        generateBill.setDisable(true);
+        checkStocks();
+        paneTwoFunction();
     }
 
     public void cancel(ActionEvent actionEvent) {
@@ -196,16 +239,12 @@ public class Cashier_Controller implements Initializable {
         alert.setHeaderText("Are you sure you want to cancel");
         Optional<ButtonType> answer = alert.showAndWait();
         if(answer.get() == ButtonType.OK){
-            paid.setText(" ");
-            change.setText(" ");
-            records.clear();
-            addToTable();
+            clearBill();
         }
     }
 
     void calculateTotal(){
 
-        double totalPrice = 0.0;
         if(records.isEmpty()){
             totalPrice = 0.0;
         }else{
@@ -217,9 +256,37 @@ public class Cashier_Controller implements Initializable {
     }
 
     public void onEntered(ActionEvent actionEvent) {
-        double paidAmount = Double.parseDouble(paid.getText());
-        double changeAmount = paidAmount - Double.parseDouble(total.getText());
-        change.setText(Double.toString(changeAmount));
+        paidAmount = Double.parseDouble(paid.getText());
+        changeAmount = paidAmount - Double.parseDouble(total.getText());
+        if(changeAmount < 0){
+            Alert alert = new Alert(Alert.AlertType.NONE);alert.setAlertType(Alert.AlertType.ERROR);
+            alert.setHeaderText("Entered amount is less than the bill !");
+            alert.show();
+        }else{
+            change.setText(Double.toString(changeAmount));
+            generateBill.setDisable(false);
+        }
+    }
+
+    //checking stocks
+    void checkStocks() throws SQLException {
+        ResultSet resultSet = Connect.executeQuery("Select * from products");
+        List<Record> productsLow = new ArrayList<Record>();
+        while(resultSet.next()){
+            if(resultSet.getInt("stock") < resultSet.getInt("reOrderLevel")){
+                Record record = new Record(resultSet.getInt("barcode"),resultSet.getString("product"),resultSet.getInt("stock"));
+                productsLow.add(record);
+            }
+        }
+        if(!productsLow.isEmpty()){
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            String p = "";
+            for(Record pro : productsLow){
+                p = p + pro.getProduct() + "\n";
+            }
+            alert.setContentText(p);
+            alert.show();
+        }
     }
 
     //Pane 2

@@ -12,6 +12,7 @@ public class Record {
     private SimpleIntegerProperty quantity;
     private SimpleDoubleProperty totalPrice;
 
+    //for billing
     Record(int barcode, String product, double price, int stock, int quantity, double totalPrice){
         this.barcode = new SimpleIntegerProperty(barcode);
         this.product = new SimpleStringProperty(product);
@@ -21,10 +22,18 @@ public class Record {
         this.totalPrice = new SimpleDoubleProperty(totalPrice);
     }
 
+    //for showing products
     Record(int barcode, String product, double price, int stock){
         this.barcode = new SimpleIntegerProperty(barcode);
         this.product = new SimpleStringProperty(product);
         this.price = new SimpleDoubleProperty(price);
+        this.stock = new SimpleIntegerProperty(stock);
+    }
+
+    //for checking the stocks
+    Record(int barcode, String product, int stock){
+        this.barcode = new SimpleIntegerProperty(barcode);
+        this.product = new SimpleStringProperty(product);
         this.stock = new SimpleIntegerProperty(stock);
     }
 
