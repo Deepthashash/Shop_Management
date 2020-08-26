@@ -1,6 +1,7 @@
 package com.deeptha.cashier;
 
 import com.deeptha.database.Connect;
+import com.deeptha.services.Record;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;

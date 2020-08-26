@@ -18,7 +18,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="728.0" prefWidth="1080.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.deeptha.cashier.Cashier_Controller">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="728.0" prefWidth="1080.0" style="-fx-background-color: gray;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.deeptha.cashier.Cashier_Controller">
    <top>
       <MenuBar BorderPane.alignment="CENTER">
         <menus>
@@ -41,28 +41,28 @@
       </MenuBar>
    </top>
    <center>
-      <TabPane prefHeight="200.0" prefWidth="200.0" tabClosingPolicy="UNAVAILABLE" BorderPane.alignment="CENTER">
+      <TabPane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: gray;" tabClosingPolicy="UNAVAILABLE" BorderPane.alignment="CENTER">
         <tabs>
           <Tab text="Genarate Bill">
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" style="-fx-border-radius: 5;">
                      <children>
-                        <HBox prefHeight="71.0" prefWidth="1040.0" style="-fx-background-color: #55BCC9; -fx-border-radius: 40px;" AnchorPane.bottomAnchor="593.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0">
+                        <HBox prefHeight="71.0" prefWidth="1040.0" style="-fx-background-color: #A9A9A9; -fx-border-radius: 40px;" AnchorPane.bottomAnchor="593.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0">
                            <padding>
                               <Insets left="20.0" right="20.0" top="20.0" />
                            </padding>
                            <children>
-                              <TextField fx:id="barcode" maxWidth="200.0" onAction="#onType" prefHeight="30.0" prefWidth="200.0">
+                              <TextField fx:id="barcode" maxWidth="200.0" onAction="#onType" prefHeight="30.0" prefWidth="200.0" style="-fx-background-color: #d0d3d4;">
                                  <HBox.margin>
                                     <Insets />
                                  </HBox.margin>
                               </TextField>
-                              <HBox prefHeight="51.0" prefWidth="792.0" style="-fx-background-color: teal;">
+                              <HBox prefHeight="51.0" prefWidth="792.0" style="-fx-background-color: #d0d3d4;">
                                  <HBox.margin>
                                     <Insets bottom="10.0" left="150.0" top="-10.0" />
                                  </HBox.margin>
                                  <children>
-                                    <Label fx:id="product" alignment="CENTER" prefHeight="42.0" prefWidth="200.0" text="-" textAlignment="CENTER" textFill="WHITE">
+                                    <Label fx:id="product" alignment="CENTER" prefHeight="42.0" prefWidth="200.0" text="-" textAlignment="CENTER">
                                        <HBox.margin>
                                           <Insets left="10.0" top="5.0" />
                                        </HBox.margin>
@@ -70,7 +70,7 @@
                                           <Font size="25.0" />
                                        </font>
                                     </Label>
-                                    <Label fx:id="price" alignment="CENTER" layoutX="20.0" layoutY="15.0" prefHeight="42.0" prefWidth="200.0" text="-" textAlignment="CENTER" textFill="WHITE">
+                                    <Label fx:id="price" alignment="CENTER" layoutX="20.0" layoutY="15.0" prefHeight="42.0" prefWidth="200.0" text="-" textAlignment="CENTER">
                                        <font>
                                           <Font size="25.0" />
                                        </font>
@@ -78,7 +78,7 @@
                                           <Insets left="10.0" top="5.0" />
                                        </HBox.margin>
                                     </Label>
-                                    <Label fx:id="stock" alignment="CENTER" layoutX="20.0" layoutY="15.0" prefHeight="42.0" prefWidth="100.0" text="-" textAlignment="CENTER" textFill="WHITE">
+                                    <Label fx:id="stock" alignment="CENTER" layoutX="20.0" layoutY="15.0" prefHeight="42.0" prefWidth="100.0" text="-" textAlignment="CENTER">
                                        <font>
                                           <Font size="25.0" />
                                        </font>
@@ -86,7 +86,7 @@
                                           <Insets left="10.0" top="5.0" />
                                        </HBox.margin>
                                     </Label>
-                                    <TextField fx:id="quantity" alignment="CENTER" prefHeight="42.0" prefWidth="100.0" text="1">
+                                    <TextField fx:id="quantity" alignment="CENTER" prefHeight="42.0" prefWidth="100.0" style="-fx-background-color: #d0d3d4;" text="1">
                                        <HBox.margin>
                                           <Insets left="10.0" top="5.0" />
                                        </HBox.margin>
@@ -94,12 +94,12 @@
                                           <Font name="System Bold" size="15.0" />
                                        </font>
                                     </TextField>
-                                    <Button fx:id="add" disable="true" mnemonicParsing="false" onAction="#onAdd" prefHeight="42.0" prefWidth="100.0" text="Add">
+                                    <Button fx:id="add" disable="true" mnemonicParsing="false" onAction="#onAdd" prefHeight="42.0" prefWidth="100.0" style="-fx-background-color: #2e86c1;" text="Add">
                                        <HBox.margin>
                                           <Insets left="30.0" top="5.0" />
                                        </HBox.margin>
                                        <font>
-                                          <Font size="15.0" />
+                                          <Font size="15.0" name="System Bold"/>
                                        </font>
                                     </Button>
                                  </children>
@@ -108,7 +108,7 @@
                         </HBox>
                         <HBox layoutX="10.0" layoutY="116.0" prefHeight="508.0" prefWidth="1056.0" AnchorPane.bottomAnchor="50.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="116.0">
                            <children>
-                               <TableView fx:id="billTable" maxWidth="1.7976931348623157E308" prefHeight="508.0" prefWidth="1054.0">
+                               <TableView fx:id="billTable" maxWidth="1.7976931348623157E308" prefHeight="508.0" prefWidth="1054.0" style="-fx-background-color: #d0d3d4;">
                                    <columns>
                                        <TableColumn fx:id="billBarcode" prefWidth="133.0" text="Barcode" />
                                        <TableColumn fx:id="billProduct" prefWidth="181.0" text="Product" />
@@ -139,8 +139,11 @@
                                              <HBox.margin>
                                                 <Insets left="30.0" right="5.0" />
                                              </HBox.margin>
+                                             <font>
+                                                <Font name="System Bold" size="12.0" />
+                                             </font>
                                           </Label>
-                                          <TextField fx:id="total" alignment="CENTER" maxWidth="100.0" prefWidth="100.0">
+                                          <TextField fx:id="total" alignment="CENTER" maxWidth="100.0" prefWidth="100.0" style="-fx-background-color: #d0d3d4;">
                                              <HBox.margin>
                                                 <Insets left="40.0" />
                                              </HBox.margin>
@@ -153,8 +156,11 @@
                                              <HBox.margin>
                                                 <Insets left="30.0" right="5.0" />
                                              </HBox.margin>
+                                              <font>
+                                                  <Font name="System Bold" size="12.0" />
+                                              </font>
                                           </Label>
-                                          <TextField fx:id="paid" alignment="CENTER" maxWidth="100.0" onAction="#onEntered" prefWidth="100.0" />
+                                          <TextField fx:id="paid" alignment="CENTER" maxWidth="100.0" onAction="#onEntered" prefWidth="100.0" style="-fx-background-color: #d0d3d4;" />
                                        </children>
                                        <VBox.margin>
                                           <Insets top="5.0" />
@@ -166,8 +172,11 @@
                                              <HBox.margin>
                                                 <Insets left="30.0" right="5.0" />
                                              </HBox.margin>
+                                              <font>
+                                                  <Font name="System Bold" size="12.0" />
+                                              </font>
                                           </Label>
-                                          <TextField fx:id="change" alignment="CENTER" maxWidth="100.0" prefWidth="100.0">
+                                          <TextField fx:id="change" alignment="CENTER" maxWidth="100.0" prefWidth="100.0" style="-fx-background-color: #d0d3d4;">
                                              <HBox.margin>
                                                 <Insets left="27.0" />
                                              </HBox.margin>
@@ -177,15 +186,21 @@
                                           <Insets top="5.0" />
                                        </VBox.margin>
                                     </HBox>
-                                    <Button maxWidth="200.0" mnemonicParsing="false" onAction="#generateBill" prefWidth="200.0" text="Generate Bill" fx:id="generateBill">
+                                    <Button fx:id="generateBill" maxWidth="200.0" mnemonicParsing="false" onAction="#generateBill" prefWidth="200.0" style="-fx-background-color: #229954;" text="Generate Bill">
                                        <VBox.margin>
                                           <Insets left="30.0" top="10.0" />
                                        </VBox.margin>
+                                        <font>
+                                            <Font name="System Bold" size="12.0" />
+                                        </font>
                                     </Button>
-                                    <Button maxWidth="200.0" mnemonicParsing="false" onAction="#cancel" prefHeight="25.0" prefWidth="200.0" text="Cancel">
+                                    <Button maxWidth="200.0" mnemonicParsing="false"  onAction="#cancel" prefHeight="25.0" prefWidth="200.0" style="-fx-background-color: #e74c3c;" text="Cancel">
                                        <VBox.margin>
                                           <Insets left="30.0" top="10.0" />
                                        </VBox.margin>
+                                        <font>
+                                            <Font name="System Bold" size="12.0" />
+                                        </font>
                                     </Button>
                                  </children>
                               </VBox>
@@ -199,8 +214,11 @@
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <TextField fx:id="search" layoutX="23.0" layoutY="16.0" maxWidth="150.0" AnchorPane.leftAnchor="20.0" />
-                        <TableView fx:id="searchTable" layoutX="23.0" layoutY="52.0" prefHeight="320.0" prefWidth="657.0" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="52.0">
+                        <TextField fx:id="search" layoutX="23.0" layoutY="16.0" maxWidth="150.0" style="-fx-background-color: #d0d3d4;" AnchorPane.leftAnchor="20.0">
+                           <font>
+                              <Font size="14.0" />
+                           </font></TextField>
+                        <TableView fx:id="searchTable" layoutX="23.0" layoutY="52.0" prefHeight="320.0" prefWidth="657.0" style="-fx-background-color: #d0d3d4;" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="52.0">
                           <columns>
                             <TableColumn fx:id="searchBarcode" prefWidth="75.0" text="Barcode" />
                             <TableColumn fx:id="searchName" prefWidth="185.0" text="Product" />
@@ -218,7 +236,10 @@
                                 </ContextMenu>
                             </contextMenu>
                         </TableView>
-                        <Button layoutX="195.0" layoutY="16.0" mnemonicParsing="false" onAction="#search" text="Search" />
+                        <Button layoutX="195.0" layoutY="16.0" mnemonicParsing="false" onAction="#search" prefWidth="59.0" style="-fx-background-color: #229954;" text="Search">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font></Button>
                      </children>
                   </AnchorPane>
             </content>

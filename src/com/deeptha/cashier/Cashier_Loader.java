@@ -12,9 +12,8 @@ public class Cashier_Loader extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception{
         Parent root = FXMLLoader.load(getClass().getResource("cashier.fxml"));
-//        primaryStage.setResizable(false);
         primaryStage.setTitle("Cashier");
-        primaryStage.setScene(new Scene(root, 600, 400));
+        primaryStage.setScene(new Scene(root, 1080, 728));
         primaryStage.show();
     }
 

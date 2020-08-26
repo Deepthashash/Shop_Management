@@ -1,4 +1,4 @@
-package com.deeptha.cashier;
+package com.deeptha.services;
 
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleIntegerProperty;
@@ -11,9 +11,10 @@ public class Record {
     private SimpleIntegerProperty stock;
     private SimpleIntegerProperty quantity;
     private SimpleDoubleProperty totalPrice;
+    private SimpleIntegerProperty reOrderLevel;
 
     //for billing
-    Record(int barcode, String product, double price, int stock, int quantity, double totalPrice){
+    public Record(int barcode, String product, double price, int stock, int quantity, double totalPrice){
         this.barcode = new SimpleIntegerProperty(barcode);
         this.product = new SimpleStringProperty(product);
         this.price = new SimpleDoubleProperty(price);
@@ -23,7 +24,7 @@ public class Record {
     }
 
     //for showing products
-    Record(int barcode, String product, double price, int stock){
+    public Record(int barcode, String product, double price, int stock){
         this.barcode = new SimpleIntegerProperty(barcode);
         this.product = new SimpleStringProperty(product);
         this.price = new SimpleDoubleProperty(price);
@@ -31,10 +32,19 @@ public class Record {
     }
 
     //for checking the stocks
-    Record(int barcode, String product, int stock){
+    public Record(int barcode, String product, int stock){
         this.barcode = new SimpleIntegerProperty(barcode);
         this.product = new SimpleStringProperty(product);
         this.stock = new SimpleIntegerProperty(stock);
+    }
+
+    //for admin products module
+    public Record(int barcode, String product, double price, int stock, int reOrderLevel){
+        this.barcode = new SimpleIntegerProperty(barcode);
+        this.product = new SimpleStringProperty(product);
+        this.price = new SimpleDoubleProperty(price);
+        this.stock = new SimpleIntegerProperty(stock);
+        this.reOrderLevel = new SimpleIntegerProperty(reOrderLevel);
     }
 
     public double getTotalPrice() {
@@ -84,4 +94,13 @@ public class Record {
     public void setStock(int stock) {
         this.stock.set(stock);
     }
+
+    public int getReOrderLevel() {
+        return reOrderLevel.get();
+    }
+
+    public void setReOrderLevel(int reOrderLevel) {
+        this.reOrderLevel.set(reOrderLevel);
+    }
+
 }
