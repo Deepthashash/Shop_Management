@@ -24,7 +24,7 @@
         <menus>
           <Menu mnemonicParsing="false" text="File">
             <items>
-              <MenuItem mnemonicParsing="false" text="Close" />
+              <MenuItem mnemonicParsing="false" onAction="#logout" text="Logout" />
             </items>
           </Menu>
           <Menu mnemonicParsing="false" text="Edit">
@@ -47,165 +47,179 @@
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" style="-fx-border-radius: 5;">
                      <children>
-                        <HBox prefHeight="71.0" prefWidth="1040.0" style="-fx-background-color: #A9A9A9; -fx-border-radius: 40px;" AnchorPane.bottomAnchor="593.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0">
-                           <padding>
-                              <Insets left="20.0" right="20.0" top="20.0" />
-                           </padding>
+                        <VBox alignment="TOP_CENTER" layoutX="10.0" layoutY="10.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0">
                            <children>
-                              <TextField fx:id="barcode" maxWidth="200.0" onAction="#onType" prefHeight="30.0" prefWidth="200.0" style="-fx-background-color: #d0d3d4;">
-                                 <HBox.margin>
-                                    <Insets />
-                                 </HBox.margin>
-                              </TextField>
-                              <HBox prefHeight="51.0" prefWidth="792.0" style="-fx-background-color: #d0d3d4;">
-                                 <HBox.margin>
-                                    <Insets bottom="10.0" left="150.0" top="-10.0" />
-                                 </HBox.margin>
+                              <HBox prefHeight="71.0" prefWidth="1040.0" style="-fx-background-color: #A9A9A9; -fx-border-radius: 40px;">
+                                 <padding>
+                                    <Insets left="20.0" right="20.0" top="20.0" />
+                                 </padding>
                                  <children>
-                                    <Label fx:id="product" alignment="CENTER" prefHeight="42.0" prefWidth="200.0" text="-" textAlignment="CENTER">
+                                    <TextField fx:id="barcode" maxWidth="200.0" onAction="#onType" prefHeight="30.0" prefWidth="200.0" style="-fx-background-color: #d0d3d4;">
                                        <HBox.margin>
-                                          <Insets left="10.0" top="5.0" />
+                                          <Insets />
                                        </HBox.margin>
-                                       <font>
-                                          <Font size="25.0" />
-                                       </font>
-                                    </Label>
-                                    <Label fx:id="price" alignment="CENTER" layoutX="20.0" layoutY="15.0" prefHeight="42.0" prefWidth="200.0" text="-" textAlignment="CENTER">
-                                       <font>
-                                          <Font size="25.0" />
-                                       </font>
-                                       <HBox.margin>
-                                          <Insets left="10.0" top="5.0" />
-                                       </HBox.margin>
-                                    </Label>
-                                    <Label fx:id="stock" alignment="CENTER" layoutX="20.0" layoutY="15.0" prefHeight="42.0" prefWidth="100.0" text="-" textAlignment="CENTER">
-                                       <font>
-                                          <Font size="25.0" />
-                                       </font>
-                                       <HBox.margin>
-                                          <Insets left="10.0" top="5.0" />
-                                       </HBox.margin>
-                                    </Label>
-                                    <TextField fx:id="quantity" alignment="CENTER" prefHeight="42.0" prefWidth="100.0" style="-fx-background-color: #d0d3d4;" text="1">
-                                       <HBox.margin>
-                                          <Insets left="10.0" top="5.0" />
-                                       </HBox.margin>
-                                       <font>
-                                          <Font name="System Bold" size="15.0" />
-                                       </font>
                                     </TextField>
-                                    <Button fx:id="add" disable="true" mnemonicParsing="false" onAction="#onAdd" prefHeight="42.0" prefWidth="100.0" style="-fx-background-color: #2e86c1;" text="Add">
+                                    <HBox alignment="CENTER" prefHeight="51.0" prefWidth="792.0" style="-fx-background-color: #d0d3d4;">
                                        <HBox.margin>
-                                          <Insets left="30.0" top="5.0" />
+                                          <Insets bottom="10.0" left="150.0" top="-10.0" />
                                        </HBox.margin>
-                                       <font>
-                                          <Font size="15.0" name="System Bold"/>
-                                       </font>
-                                    </Button>
-                                 </children>
-                              </HBox>
-                           </children>
-                        </HBox>
-                        <HBox layoutX="10.0" layoutY="116.0" prefHeight="508.0" prefWidth="1056.0" AnchorPane.bottomAnchor="50.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="116.0">
-                           <children>
-                               <TableView fx:id="billTable" maxWidth="1.7976931348623157E308" prefHeight="508.0" prefWidth="1054.0" style="-fx-background-color: #d0d3d4;">
-                                   <columns>
-                                       <TableColumn fx:id="billBarcode" prefWidth="133.0" text="Barcode" />
-                                       <TableColumn fx:id="billProduct" prefWidth="181.0" text="Product" />
-                                       <TableColumn fx:id="billPrice" prefWidth="188.0" text="Price" />
-                                       <TableColumn fx:id="billStock" prefWidth="100.0" text="Stock" />
-                                       <TableColumn fx:id="billQuantity" prefWidth="100.0" text="Quantity" />
-                                       <TableColumn fx:id="billTotalPrice" prefWidth="100.0" text="Total" />
-                                   </columns>
-                                 <columnResizePolicy>
-                                    <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
-                                 </columnResizePolicy>
-                                 <contextMenu>
-                                    <ContextMenu>
-                                      <items>
-                                        <MenuItem mnemonicParsing="false" onAction="#onDelete" text="Delete" />
-                                      </items>
-                                    </ContextMenu>
-                                 </contextMenu>
-                               </TableView>
-                              <VBox alignment="CENTER" maxWidth="300.0" prefWidth="300.0">
-                                 <HBox.margin>
-                                    <Insets />
-                                 </HBox.margin>
-                                 <children>
-                                    <HBox>
                                        <children>
-                                          <Label text="Total">
+                                          <Label fx:id="product" alignment="CENTER" prefHeight="42.0" prefWidth="200.0" text="-" textAlignment="CENTER">
                                              <HBox.margin>
-                                                <Insets left="30.0" right="5.0" />
+                                                <Insets left="10.0" top="5.0" />
                                              </HBox.margin>
                                              <font>
-                                                <Font name="System Bold" size="12.0" />
+                                                <Font size="25.0" />
                                              </font>
                                           </Label>
-                                          <TextField fx:id="total" alignment="CENTER" maxWidth="100.0" prefWidth="100.0" style="-fx-background-color: #d0d3d4;">
+                                          <Label fx:id="price" alignment="CENTER" layoutX="20.0" layoutY="15.0" prefHeight="42.0" prefWidth="200.0" text="-" textAlignment="CENTER">
+                                             <font>
+                                                <Font size="25.0" />
+                                             </font>
                                              <HBox.margin>
-                                                <Insets left="40.0" />
+                                                <Insets left="10.0" top="5.0" />
                                              </HBox.margin>
-                                          </TextField>
-                                       </children>
-                                    </HBox>
-                                    <HBox layoutX="10.0" layoutY="217.0">
-                                       <children>
-                                          <Label text="Paid amount">
-                                             <HBox.margin>
-                                                <Insets left="30.0" right="5.0" />
-                                             </HBox.margin>
-                                              <font>
-                                                  <Font name="System Bold" size="12.0" />
-                                              </font>
                                           </Label>
-                                          <TextField fx:id="paid" alignment="CENTER" maxWidth="100.0" onAction="#onEntered" prefWidth="100.0" style="-fx-background-color: #d0d3d4;" />
-                                       </children>
-                                       <VBox.margin>
-                                          <Insets top="5.0" />
-                                       </VBox.margin>
-                                    </HBox>
-                                    <HBox layoutX="10.0" layoutY="232.0">
-                                       <children>
-                                          <Label text="Change">
+                                          <Label fx:id="stock" alignment="CENTER" layoutX="20.0" layoutY="15.0" prefHeight="42.0" prefWidth="100.0" text="-" textAlignment="CENTER">
+                                             <font>
+                                                <Font size="25.0" />
+                                             </font>
                                              <HBox.margin>
-                                                <Insets left="30.0" right="5.0" />
+                                                <Insets left="10.0" top="5.0" />
                                              </HBox.margin>
-                                              <font>
-                                                  <Font name="System Bold" size="12.0" />
-                                              </font>
                                           </Label>
-                                          <TextField fx:id="change" alignment="CENTER" maxWidth="100.0" prefWidth="100.0" style="-fx-background-color: #d0d3d4;">
+                                          <TextField fx:id="quantity" alignment="CENTER" prefHeight="42.0" prefWidth="100.0" style="-fx-background-color: #d0d3d4;" text="1">
                                              <HBox.margin>
-                                                <Insets left="27.0" />
+                                                <Insets left="10.0" top="5.0" />
                                              </HBox.margin>
+                                             <font>
+                                                <Font name="System Bold" size="15.0" />
+                                             </font>
                                           </TextField>
+                                          <Button fx:id="add" disable="true" mnemonicParsing="false" onAction="#onAdd" prefHeight="42.0" prefWidth="100.0" style="-fx-background-color: #2e86c1;" text="Add">
+                                             <HBox.margin>
+                                                <Insets left="30.0" top="5.0" />
+                                             </HBox.margin>
+                                             <font>
+                                                <Font name="System Bold" size="15.0" />
+                                             </font>
+                                          </Button>
                                        </children>
-                                       <VBox.margin>
-                                          <Insets top="5.0" />
-                                       </VBox.margin>
                                     </HBox>
-                                    <Button fx:id="generateBill" maxWidth="200.0" mnemonicParsing="false" onAction="#generateBill" prefWidth="200.0" style="-fx-background-color: #229954;" text="Generate Bill">
-                                       <VBox.margin>
-                                          <Insets left="30.0" top="10.0" />
-                                       </VBox.margin>
-                                        <font>
-                                            <Font name="System Bold" size="12.0" />
-                                        </font>
-                                    </Button>
-                                    <Button maxWidth="200.0" mnemonicParsing="false"  onAction="#cancel" prefHeight="25.0" prefWidth="200.0" style="-fx-background-color: #e74c3c;" text="Cancel">
-                                       <VBox.margin>
-                                          <Insets left="30.0" top="10.0" />
-                                       </VBox.margin>
-                                        <font>
-                                            <Font name="System Bold" size="12.0" />
-                                        </font>
-                                    </Button>
                                  </children>
-                              </VBox>
+                                 <VBox.margin>
+                                    <Insets />
+                                 </VBox.margin>
+                              </HBox>
+                              <HBox prefHeight="508.0" prefWidth="1056.0">
+                                 <children>
+                                     <TableView fx:id="billTable" maxWidth="1.7976931348623157E308" prefHeight="508.0" prefWidth="1054.0" style="-fx-background-color: #d0d3d4;">
+                                         <columns>
+                                             <TableColumn fx:id="billBarcode" prefWidth="133.0" text="Barcode" />
+                                             <TableColumn fx:id="billProduct" prefWidth="181.0" text="Product" />
+                                             <TableColumn fx:id="billPrice" prefWidth="188.0" text="Price" />
+                                             <TableColumn fx:id="billStock" prefWidth="100.0" text="Stock" />
+                                             <TableColumn fx:id="billQuantity" prefWidth="100.0" text="Quantity" />
+                                             <TableColumn fx:id="billTotalPrice" prefWidth="100.0" text="Total" />
+                                         </columns>
+                                       <columnResizePolicy>
+                                          <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                                       </columnResizePolicy>
+                                       <contextMenu>
+                                          <ContextMenu>
+                                            <items>
+                                              <MenuItem mnemonicParsing="false" onAction="#onDelete" text="Delete" />
+                                            </items>
+                                          </ContextMenu>
+                                       </contextMenu>
+                                     </TableView>
+                                    <VBox alignment="CENTER" maxWidth="300.0" prefWidth="300.0">
+                                       <HBox.margin>
+                                          <Insets />
+                                       </HBox.margin>
+                                       <children>
+                                          <HBox>
+                                             <children>
+                                                <Label maxWidth="100.0" prefWidth="100.0" text="Total">
+                                                   <HBox.margin>
+                                                      <Insets left="30.0" right="5.0" />
+                                                   </HBox.margin>
+                                                   <font>
+                                                      <Font name="System Bold" size="12.0" />
+                                                   </font>
+                                                </Label>
+                                                <TextField fx:id="total" alignment="CENTER" editable="false" maxWidth="100.0" prefWidth="100.0" style="-fx-background-color: #d0d3d4;">
+                                                   <HBox.margin>
+                                                      <Insets left="10.0" />
+                                                   </HBox.margin>
+                                                </TextField>
+                                             </children>
+                                          </HBox>
+                                          <HBox layoutX="10.0" layoutY="217.0">
+                                             <children>
+                                                <Label maxWidth="100.0" prefWidth="100.0" text="Paid amount">
+                                                   <HBox.margin>
+                                                      <Insets left="30.0" right="5.0" />
+                                                   </HBox.margin>
+                                                    <font>
+                                                        <Font name="System Bold" size="12.0" />
+                                                    </font>
+                                                </Label>
+                                                <TextField fx:id="paid" alignment="CENTER" maxWidth="100.0" onAction="#onEntered" prefWidth="100.0" style="-fx-background-color: #d0d3d4;">
+                                                   <HBox.margin>
+                                                      <Insets left="10.0" />
+                                                   </HBox.margin>
+                                                </TextField>
+                                             </children>
+                                             <VBox.margin>
+                                                <Insets top="5.0" />
+                                             </VBox.margin>
+                                          </HBox>
+                                          <HBox layoutX="10.0" layoutY="232.0">
+                                             <children>
+                                                <Label maxWidth="100.0" prefWidth="100.0" text="Change">
+                                                   <HBox.margin>
+                                                      <Insets left="30.0" right="5.0" />
+                                                   </HBox.margin>
+                                                    <font>
+                                                        <Font name="System Bold" size="12.0" />
+                                                    </font>
+                                                </Label>
+                                                <TextField fx:id="change" alignment="CENTER" maxWidth="100.0" prefWidth="100.0" style="-fx-background-color: #d0d3d4;">
+                                                   <HBox.margin>
+                                                      <Insets left="10.0" />
+                                                   </HBox.margin>
+                                                </TextField>
+                                             </children>
+                                             <VBox.margin>
+                                                <Insets top="5.0" />
+                                             </VBox.margin>
+                                          </HBox>
+                                          <Button fx:id="generateBill" maxWidth="200.0" mnemonicParsing="false" onAction="#generateBill" prefWidth="200.0" style="-fx-background-color: #229954;" text="Generate Bill">
+                                             <VBox.margin>
+                                                <Insets left="30.0" top="10.0" />
+                                             </VBox.margin>
+                                              <font>
+                                                  <Font name="System Bold" size="12.0" />
+                                              </font>
+                                          </Button>
+                                          <Button maxWidth="200.0" mnemonicParsing="false" onAction="#cancel" prefHeight="25.0" prefWidth="200.0" style="-fx-background-color: #e74c3c;" text="Cancel">
+                                             <VBox.margin>
+                                                <Insets left="30.0" top="10.0" />
+                                             </VBox.margin>
+                                              <font>
+                                                  <Font name="System Bold" size="12.0" />
+                                              </font>
+                                          </Button>
+                                       </children>
+                                    </VBox>
+                                 </children>
+                                 <VBox.margin>
+                                    <Insets top="10.0" />
+                                 </VBox.margin>
+                              </HBox>
                            </children>
-                        </HBox>
+                        </VBox>
                      </children>
                   </AnchorPane>
             </content>

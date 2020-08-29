@@ -32,7 +32,7 @@ public class Connect {
     public static ResultSet executeQuery(String query){
         ResultSet results;
         try {
-            stmt = conn.createStatement();
+            stmt = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
             results = stmt.executeQuery(query);
         } catch (SQLException throwables) {
             throwables.printStackTrace();

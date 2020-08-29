@@ -1,4 +1,4 @@
-package com.deeptha.admin;
+package com.deeptha.admin.products;
 
 import com.deeptha.database.Connect;
 import com.deeptha.services.Record;
@@ -124,27 +124,43 @@ public class Products_Controller implements Initializable {
         Record selected = adminProductTable.getSelectionModel().getSelectedItem();
 
         Alert alert = new Alert(Alert.AlertType.NONE);
-        alert.setAlertType(Alert.AlertType.CONFIRMATION);
-        alert.setHeaderText("Are sure you want to delete");
-        Optional<ButtonType> answer = alert.showAndWait();
-
-        if(answer.get() == ButtonType.OK){
-            Connect.executeAction("Delete from products where barcode="+"'"+selected.getBarcode()+"'");
-            getData();
+        if(selected == null){
+            alert.setAlertType(Alert.AlertType.ERROR);
+            alert.setHeaderText("No field selected!");
+            alert.show();
         }else{
+            alert.setAlertType(Alert.AlertType.CONFIRMATION);
+            alert.setHeaderText("Are sure you want to delete");
+            Optional<ButtonType> answer = alert.showAndWait();
+            if(answer.get() == ButtonType.OK){
+                Connect.executeAction("Delete from products where barcode="+"'"+selected.getBarcode()+"'");
+                getData();
+            }else{
 
+            }
         }
+
+
+
 
     }
 
     public void edit(ActionEvent actionEvent) throws IOException {
         Record selected = adminProductTable.getSelectionModel().getSelectedItem();
-        SelectedRecord.rec = selected;
-        Parent parent = FXMLLoader.load(getClass().getResource("/com/deeptha/admin/productsEditForm.fxml"));
-        Stage stage =new Stage(StageStyle.DECORATED);
-        stage.setTitle("Edit Form");
-        stage.setScene(new Scene(parent));
-        stage.show();
+
+        Alert alert = new Alert(Alert.AlertType.NONE);
+        if(selected == null){
+            alert.setAlertType(Alert.AlertType.ERROR);
+            alert.setHeaderText("No field selected!");
+            alert.show();
+        }else {
+            SelectedRecord.rec = selected;
+            Parent parent = FXMLLoader.load(getClass().getResource("/com/deeptha/admin/products/productsEditForm.fxml"));
+            Stage stage = new Stage(StageStyle.DECORATED);
+            stage.setTitle("Edit Form");
+            stage.setScene(new Scene(parent));
+            stage.show();
+        }
     }
 
     public void onSearch(ActionEvent actionEvent) {
@@ -152,10 +168,15 @@ public class Products_Controller implements Initializable {
     }
 
     public void onAdd(ActionEvent actionEvent) throws IOException {
-        Parent parent = FXMLLoader.load(getClass().getResource("/com/deeptha/admin/productsAddForm.fxml"));
+        Parent parent = FXMLLoader.load(getClass().getResource("/com/deeptha/admin/products/productsAddForm.fxml"));
         Stage stage =new Stage(StageStyle.DECORATED);
         stage.setTitle("Add Form");
         stage.setScene(new Scene(parent));
         stage.show();
     }
+
+    public void refresh(ActionEvent actionEvent) {
+        getData();
+    }
+
 }

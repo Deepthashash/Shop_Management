@@ -46,6 +46,13 @@ public class Record {
         this.stock = new SimpleIntegerProperty(stock);
         this.reOrderLevel = new SimpleIntegerProperty(reOrderLevel);
     }
+    //billForm
+    public Record(int barcode, String product, int quantity, double totalPrice){
+        this.barcode = new SimpleIntegerProperty(barcode);
+        this.product = new SimpleStringProperty(product);
+        this.quantity = new SimpleIntegerProperty(quantity);
+        this.totalPrice = new SimpleDoubleProperty(totalPrice);
+    }
 
     public double getTotalPrice() {
         return totalPrice.get();

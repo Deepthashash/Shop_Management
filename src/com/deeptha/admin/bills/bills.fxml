@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Font?>
+<AnchorPane prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: gray;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.deeptha.admin.bills.Bills_Controller">
+   <children>
+      <VBox prefHeight="400.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <HBox prefHeight="58.0" prefWidth="2000.0">
+               <children>
+                  <HBox alignment="CENTER_LEFT" prefHeight="65.0" prefWidth="2000.0" style="-fx-background-color: #A9A9A9;">
+                     <children>
+                        <TextField fx:id="searchBill" prefHeight="40.0" style="-fx-background-color: #d0d3d4;">
+                           <HBox.margin>
+                              <Insets left="10.0" />
+                           </HBox.margin>
+                        </TextField>
+                        <Button maxHeight="35.0" mnemonicParsing="false" prefHeight="35.0" style="-fx-background-color: teal;" text="Search" onAction="#onSearch">
+                           <HBox.margin>
+                              <Insets left="5.0" />
+                           </HBox.margin>
+                           <font>
+                              <Font name="System Bold" size="14.0" />
+                           </font>
+                        </Button>
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="2000.0" style="-fx-background-color: #A9A9A9;">
+                     <children>
+<!--                        <Button maxHeight="40.0" mnemonicParsing="false" prefHeight="40.0" style="-fx-background-color: #2e86c1;" text="Add" onAction="#onAdd">-->
+<!--                           <HBox.margin>-->
+<!--                              <Insets right="10.0" />-->
+<!--                           </HBox.margin>-->
+<!--                           <font>-->
+<!--                              <Font name="System Bold" size="14.0" />-->
+<!--                           </font>-->
+<!--                        </Button>-->
+                     </children>
+                  </HBox>
+               </children>
+               <VBox.margin>
+                  <Insets left="10.0" right="10.0" top="10.0" />
+               </VBox.margin>
+            </HBox>
+            <AnchorPane maxHeight="1000.0" maxWidth="2000.0" prefHeight="600.0" prefWidth="2000.0" style="-fx-background-color: #A9A9A9;">
+               <VBox.margin>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+               </VBox.margin>
+               <children>
+                  <TableView fx:id="adminBillTable" layoutX="21.0" layoutY="23.0" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #d0d3d4;" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0">
+                    <columns>
+                      <TableColumn fx:id="id" prefWidth="500.0" text="Invoice #" />
+                      <TableColumn fx:id="time" prefWidth="500.0" text="Issued Time" />
+                       <TableColumn fx:id="total" prefWidth="500.0" text="Bill Total" />
+                       <TableColumn fx:id="paid" prefWidth="500.0" text="Paid Amount" />
+                       <TableColumn fx:id="change" prefWidth="500.0" text="Change Amount" />
+                    </columns>
+                     <columnResizePolicy>
+                        <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                     </columnResizePolicy>
+                     <contextMenu>
+                        <ContextMenu>
+                          <items>
+                             <MenuItem mnemonicParsing="false" text="Show Bill" onAction="#showBill"/>
+                              <MenuItem mnemonicParsing="false" text="Refresh" onAction="#refresh"/>
+                          </items>
+                        </ContextMenu>
+                     </contextMenu>
+                  </TableView>
+               </children>
+            </AnchorPane>
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>

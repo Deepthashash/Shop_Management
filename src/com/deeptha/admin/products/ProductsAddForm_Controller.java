@@ -1,4 +1,4 @@
-package com.deeptha.admin;
+package com.deeptha.admin.products;
 
 import com.deeptha.database.Connect;
 import javafx.event.ActionEvent;

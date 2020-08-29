@@ -6,10 +6,16 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
+import java.io.IOException;
 import java.net.URL;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -352,5 +358,24 @@ public class Cashier_Controller implements Initializable {
         proStock = selected.getStock();
 
         add.setDisable(false);
+    }
+
+    public void logout(ActionEvent actionEvent) throws IOException {
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setHeaderText("Are you sure you want to logout?");
+        Optional<ButtonType> answer = alert.showAndWait();
+        if(answer.get() == ButtonType.OK){
+            Parent parent = FXMLLoader.load(getClass().getResource("/com/deeptha/login/login.fxml"));
+            Stage stage =new Stage(StageStyle.DECORATED);
+            stage.setTitle("Add Form");
+            stage.setScene(new Scene(parent));
+            stage.show();
+
+            Stage stage2 = (Stage) barcode.getScene().getWindow();
+            stage2.close();
+        }else{
+
+        }
+
     }
 }

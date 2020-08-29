@@ -9,11 +9,11 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="300.0" prefWidth="400.0" style="-fx-background-color: gray;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.deeptha.admin.ProductsEditForm_Controller">
+<AnchorPane prefHeight="300.0" prefWidth="400.0" style="-fx-background-color: gray;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.deeptha.admin.products.ProductsAddForm_Controller">
    <children>
       <VBox alignment="TOP_CENTER" prefHeight="300.0" prefWidth="400.0" style="-fx-background-color: #A9A9A9;" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0">
          <children>
-            <Label text="Edit Form">
+            <Label text="Add Form">
                <font>
                   <Font name="System Bold" size="25.0" />
                </font>
@@ -49,7 +49,7 @@
                   <Insets left="10.0" right="10.0" top="8.0" />
                </VBox.margin>
             </TextField>
-            <TextField fx:id="formRel" alignment="CENTER" layoutX="10.0" layoutY="136.0" promptText="barcode" style="-fx-background-color: #d0d3d4;">
+            <TextField fx:id="formRel" alignment="CENTER" layoutX="10.0" layoutY="136.0" promptText="re-OrderLevel" style="-fx-background-color: #d0d3d4;">
                <font>
                   <Font size="14.0" />
                </font>
