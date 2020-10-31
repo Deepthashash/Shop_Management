@@ -7,6 +7,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
@@ -53,7 +54,9 @@ public class Login_Controller {
 
             }
         }else{
-            System.out.println("Error");
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setHeaderText("Invalid Credentials!");
+            alert.show();
         }
     }
 
